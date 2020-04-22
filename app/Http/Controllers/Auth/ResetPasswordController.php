@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Support\Facades\DB;
 
 class ResetPasswordController extends Controller
 {
@@ -26,5 +27,34 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/users/profile';
+
+    /**
+     * Hours, after passwords reset queries will be deleted
+     *
+     * @var int
+     */
+    protected $resetQueriesHours = 3;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
+    /**
+     * Delete old reset password query
+     */
+    public function deletePasswordResetQuery()
+    {
+        $queries = DB::table('password_resets')
+            ->where('created_at', '<', Carbon::now()->subHour($this->resetQueriesHours))
+            ->delete();
+
+        echo 'Delete ' . $queries . ' query(s) for password reset';
+    }
 }

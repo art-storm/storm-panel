@@ -24,7 +24,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('users:deleteNonActivate')->hourlyAt(3);
+        $schedule->command('users:deletePasswordReset')->hourlyAt(5);
+        $schedule->command('users:deleteEmailChange')->hourlyAt(7);
     }
 
     /**
@@ -34,7 +36,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
     <div id="app">
@@ -55,6 +56,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('users_profile') }}">User profile</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -73,8 +75,25 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
+
+        <footer class="footer">
+            <div class="container">
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4 text-nowrap">&copy; {{ date('Y') }} Storm-Panel.</div>
+                    <div class="col-sm-8 text-sm-right text-nowrap">
+                <span class="mr-3">
+                    Design and programming by <a href="https://art-storm.com" target="_blank" class="dot">Art-storm</a>.
+                </span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
     </div>
 </body>
 </html>
