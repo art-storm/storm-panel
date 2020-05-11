@@ -17,6 +17,8 @@ return [
     'link_profile' => 'Go to user profile',
     'text_confirm_send' => 'The registration confirmation link was sent to the email address.',
     'text_email_change' => 'We have emailed your confirmation link to the :email, after which you confirm the change your email.',
+    'text_have_account' => 'Already have an account?',
+    'text_havent_account' => 'Don\'t have an account?',
     'text_not_receive' => 'Did not get the email?',
     'text_welcome' => 'Your account has been successfully activated. Now you can use the services of our site.',
     'title_confirm' => 'Registration confirm',

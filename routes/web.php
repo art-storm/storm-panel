@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 Auth::routes();
 Route::get('/register_verify', 'Auth\RegisterController@registerVerify')->name('register_verify');
-Route::get('/user_activate/{code}', 'Auth\RegisterController@activateUser')->name('activate.user');
+Route::get('/user_activate/{code}', 'Auth\RegisterController@activateUser')->name('activate_user');
 
 // Users routes
 Route::group(['prefix' => 'users'], function () {

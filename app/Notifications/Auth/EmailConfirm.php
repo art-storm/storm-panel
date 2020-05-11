@@ -12,7 +12,7 @@ class EmailConfirm extends Notification
 {
     use Queueable;
 
-    protected $user;
+    public $user;
 
     /**
      * Create a new notification instance.
@@ -49,7 +49,7 @@ class EmailConfirm extends Notification
             ->line(__('notification.registration.intro_verify'))
             ->action(
                 __('notification.registration.action_verify'),
-                url(route('activate.user', $user->activation_code))
+                url(route('activate_user', $user->activation_code))
             )
             ->line(__('notification.registration.outro_verify'));
     }

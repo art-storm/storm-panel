@@ -14,6 +14,8 @@ return [
     */
 
     'failed' => 'These credentials do not match our records.',
+    'login' => 'Login',
+    'signup' => 'Sign Up',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

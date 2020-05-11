@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissable">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                    <strong>{{ session('success') }}</strong>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
 
@@ -66,6 +74,9 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="text-center form-item-label mb-3">
+                @lang('registration.text_havent_account') <a href="/register">@lang('auth.signup')</a>
             </div>
         </div>
     </div>

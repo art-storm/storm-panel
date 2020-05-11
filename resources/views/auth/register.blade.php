@@ -71,6 +71,9 @@
                     </form>
                 </div>
             </div>
+            <div class="text-center form-item-label mb-3">
+                @lang('registration.text_have_account') <a href="/login">@lang('auth.login')</a>
+            </div>
         </div>
     </div>
 </div>

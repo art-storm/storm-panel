@@ -124,8 +124,11 @@ class ChangeEmailController extends Controller
         if ($user->save()) {
             EmailChanges::where('email', '=', $emailChanges->email)->delete();
 
-            $this->guard()->login($user);
             $flash_success = __('profile.success.change_email');
+        }
+
+        if (!Auth::check()) {
+            return redirect(route('login'))->with('success', $flash_success);
         }
 
         return redirect(route('users_profile'))->with('success', $flash_success);
