@@ -114,4 +114,15 @@ return [
 
     'password_timeout' => 10800,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Two factor authenticated methods
+    |--------------------------------------------------------------------------
+    |
+    | Here you may define two factor authenticated methods
+    */
+
+    'two_factor_methods' => [
+        'email',
+    ],
 ];

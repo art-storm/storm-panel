@@ -81,6 +81,6 @@ class ForgotPasswordController extends Controller
     public function notifyNonActivateUser(User $user)
     {
         $user->notify(new EmailConfirm($user));
-        return redirect(route('register_verify'))->with('success', 'register_verify');
+        return redirect(route('register.verify'))->with('success', 'register.verify');
     }
 }

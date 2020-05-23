@@ -19,7 +19,7 @@ class ChangeEmailTest extends TestCase
     public function testAuthUserCanViewChangeEmailForm()
     {
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->get(route('email_changeForm'));
+        $response = $this->actingAs($user)->get(route('email.change.form'));
         $response->assertSuccessful();
         $response->assertViewIs('users.email_change');
     }
@@ -31,7 +31,7 @@ class ChangeEmailTest extends TestCase
      */
     public function testNonAuthUserCannotViewChangeEmailForm()
     {
-        $response = $this->get(route('email_changeForm'));
+        $response = $this->get(route('email.change.form'));
         $response->assertRedirect('/login');
     }
 
@@ -44,12 +44,12 @@ class ChangeEmailTest extends TestCase
     {
         $emailNew = 'dfghdgshdgjhgf';
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->from(route('email_changeForm'))
-            ->post(route('email_change'), [
+        $response = $this->actingAs($user)->from(route('email.change.form'))
+            ->post(route('email.change'), [
                 'email' => $emailNew,
                 'password' => 'password',
             ]);
-        $response->assertRedirect(route('email_changeForm'));
+        $response->assertRedirect(route('email.change.form'));
         $response->assertSessionHasErrors('email');
     }
 
@@ -63,12 +63,12 @@ class ChangeEmailTest extends TestCase
         $emailNew = Faker\Factory::create()->unique()->email;
 
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->from(route('email_changeForm'))
-            ->post(route('email_change'), [
+        $response = $this->actingAs($user)->from(route('email.change.form'))
+            ->post(route('email.change'), [
                 'email' => $emailNew,
                 'password' => 'password-wrong',
             ]);
-        $response->assertRedirect(route('email_changeForm'));
+        $response->assertRedirect(route('email.change.form'));
         $response->assertSessionHasErrors('password');
         $this->assertTrue(session()->hasOldInput('email'));
     }
@@ -86,12 +86,12 @@ class ChangeEmailTest extends TestCase
         $user = factory(User::class)->create();
         $emailOld = $user->email;
         $emailNew = Faker\Factory::create()->unique()->safeEmail;
-        $response = $this->actingAs($user)->from(route('email_changeForm'))
-            ->post(route('email_change'), [
+        $response = $this->actingAs($user)->from(route('email.change.form'))
+            ->post(route('email.change'), [
                 'email' => $emailNew,
                 'password' => 'password',
             ]);
-        $response->assertRedirect(route('email_change_notify'));
+        $response->assertRedirect(route('email.change.notify'));
 
         $dbEmailChanges = EmailChanges::where('email', '=', $emailOld)->first();
         $this->assertNotNull($dbEmailChanges);
@@ -104,7 +104,7 @@ class ChangeEmailTest extends TestCase
             }
         );
 
-        $this->get(route('email_change_confirm', ['token' => $dbEmailChanges->change_code]));
+        $this->get(route('email.change.confirm', ['token' => $dbEmailChanges->change_code]));
 
         $user->refresh();
         $this->assertTrue($user->email === $emailNew);

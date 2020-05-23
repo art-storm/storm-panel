@@ -16,7 +16,7 @@
 
             <h4>@lang('profile.email_change')</h4><br>
 
-            <form method="POST" action="{{ route('email_change') }}" name="emailChangeForm" id="emailChangeForm">
+            <form method="POST" action="{{ route('email.change') }}" name="emailChangeForm" id="emailChangeForm">
             {{ csrf_field() }}
 
             <div class="form-group row">
@@ -50,7 +50,7 @@
             <div class="form-group row">
                 <div class="col-md-6 offset-md-3 my-3">
                     <input class="btn btn-primary mr-2" type="submit" value="@lang('common.button.change')">
-                    <a href="{{route('users_profile')}}" class="btn btn-light">@lang('common.button.cancel')</a>
+                    <a href="{{route('users.profile')}}" class="btn btn-light">@lang('common.button.cancel')</a>
                 </div>
             </div>
             </form>

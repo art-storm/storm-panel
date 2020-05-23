@@ -25,7 +25,7 @@ class ChangePasswordController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth', 'twofactor']);
     }
 
     /**
@@ -52,7 +52,7 @@ class ChangePasswordController extends Controller
             $flash_success = __('profile.success.change_password');
         }
 
-        return redirect()->route('users_profile')->with('success', $flash_success);
+        return redirect()->route('users.profile')->with('success', $flash_success);
     }
 
     /**

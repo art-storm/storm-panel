@@ -17,7 +17,7 @@ class UserProfileTest extends TestCase
     public function testUserCanViewProfile()
     {
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->get(route('users_profile'));
+        $response = $this->actingAs($user)->get(route('users.profile'));
         $response->assertSuccessful();
         $response->assertViewIs('users.profile');
     }
@@ -29,7 +29,7 @@ class UserProfileTest extends TestCase
      */
     public function testUserNonAuthCannotViewProfile()
     {
-        $response = $this->get(route('users_profile'));
+        $response = $this->get(route('users.profile'));
         $response->assertRedirect('/login');
     }
 
@@ -40,20 +40,20 @@ class UserProfileTest extends TestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->actingAs($user)->from(route('users_profile'))
-            ->post(route('users_profile_update'), [
+        $response = $this->actingAs($user)->from(route('users.profile'))
+            ->post(route('users.profile_update'), [
                 'name' => '',
         ]);
 
-        $response->assertRedirect(route('users_profile'));
+        $response->assertRedirect(route('users.profile'));
         $response->assertSessionHasErrors('name');
 
-        $response = $this->actingAs($user)->from(route('users_profile'))
-            ->post(route('users_profile_update'), [
+        $response = $this->actingAs($user)->from(route('users.profile'))
+            ->post(route('users.profile_update'), [
                 'name' => Str::random(40),
         ]);
 
-        $response->assertRedirect(route('users_profile'));
+        $response->assertRedirect(route('users.profile'));
         $response->assertSessionHasErrors('name');
         $this->assertTrue(session()->hasOldInput('name'));
     }
@@ -67,12 +67,12 @@ class UserProfileTest extends TestCase
 
         $nameNew = Faker\Factory::create()->name;
 
-        $response = $this->actingAs($user)->from(route('users_profile'))
-            ->post(route('users_profile_update'), [
+        $response = $this->actingAs($user)->from(route('users.profile'))
+            ->post(route('users.profile_update'), [
                 'name' => $nameNew,
             ]);
 
-        $response->assertRedirect(route('users_profile'));
+        $response->assertRedirect(route('users.profile'));
         $response->assertSessionHas('success');
 
         $user->refresh();

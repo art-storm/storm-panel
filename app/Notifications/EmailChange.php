@@ -52,7 +52,7 @@ class EmailChange extends Notification
             ->line(__('notification.email_change.intro'))
             ->action(
                 __('notification.email_change.action'),
-                url(route('email_change_confirm', $this->token))
+                url(route('email.change.confirm', $this->token))
             )
             ->line(__('notification.email_change.outro1'))
             ->line(__('notification.email_change.outro2'));

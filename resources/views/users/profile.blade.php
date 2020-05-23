@@ -11,7 +11,7 @@
     </div>
     <!-- /.row -->
 
-    <div class="row">
+    <div class="row" id="app-profile">
         <div class="col-12">
 
             @if (session('success'))
@@ -21,7 +21,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('users_profile_update') }}" name="ProfileForm" id="ProfileForm">
+            <form method="POST" action="{{ route('users.profile_update') }}" name="ProfileForm" id="ProfileForm">
             {{ csrf_field() }}
 
             <div class="form-group row">
@@ -39,7 +39,7 @@
 
                 <div class="col-lg-4">
                     <div class="form-item-textnode">
-                        <a href="{{ route('email_changeForm') }}">{{ $user->email }}</a>
+                        <a href="{{ route('email.change.form') }}">{{ $user->email }}</a>
                     </div>
                 </div>
             </div>
@@ -49,7 +49,7 @@
 
                 <div class="col-lg-4">
                     <div class="form-item-textnode">
-                        <a href="{{ route('password_changeForm') }}">********</a>
+                        <a href="{{ route('password.change.form') }}">********</a>
                     </div>
                 </div>
             </div>
@@ -66,6 +66,18 @@
                             <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('name') }}
                         </div>
                     @endif
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="name" class="col-lg-3 control-label form-item-label text-lg-right">Two Factor Auth</label>
+
+                <div class="col-lg-4">
+                    <user-profile-2fa
+                        :state="{{ $user->two_factor_state }}"
+                        :method="'{{ $user->two_factor_method }}'"
+                    >
+                    </user-profile-2fa>
                 </div>
             </div>
 

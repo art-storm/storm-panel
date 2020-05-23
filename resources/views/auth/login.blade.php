@@ -5,15 +5,15 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
-            @if (session('success'))
+            @if (session('status'))
                 <div class="alert alert-success alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>{{ session('success') }}</strong>
+                    <strong>{{ session('status') }}</strong>
                 </div>
             @endif
 
             <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+                <div class="card-header">{{ __('auth.login') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

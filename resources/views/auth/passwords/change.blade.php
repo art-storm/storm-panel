@@ -16,7 +16,7 @@
 
             <h4>@lang('profile.password_change')</h4><br>
 
-            <form method="POST" action="{{ route('password_change') }}" name="passwordChangeForm" id="passwordChangeForm">
+            <form method="POST" action="{{ route('password.change') }}" name="passwordChangeForm" id="passwordChangeForm">
             {{ csrf_field() }}
 
             <div class="form-group row">
@@ -64,7 +64,7 @@
             <div class="form-group row">
                 <div class="col-md-6 offset-md-3 my-3">
                     <input class="btn btn-primary mr-2" type="submit" value="@lang('common.button.change')">
-                    <a href="{{route('users_profile')}}" class="btn btn-light">@lang('common.button.cancel')</a>
+                    <a href="{{route('users.profile')}}" class="btn btn-light">@lang('common.button.cancel')</a>
                 </div>
             </div>
             </form>

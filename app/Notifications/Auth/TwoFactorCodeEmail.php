@@ -4,24 +4,21 @@ namespace App\Notifications\Auth;
 
 use App\User;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class EmailConfirm extends Notification
+class TwoFactorCodeEmail extends Notification
 {
     use Queueable;
-
-    public $user;
 
     /**
      * Create a new notification instance.
      *
-     * @param User $user
+     * @return void
      */
-    public function __construct(User $user)
+    public function __construct()
     {
-        $this->user = $user;
+        //
     }
 
     /**
@@ -43,15 +40,11 @@ class EmailConfirm extends Notification
      */
     public function toMail($notifiable)
     {
-        $user = $this->user;
         return (new MailMessage())
-            ->subject(__('notification.registration.subject_verify'))
-            ->line(__('notification.registration.intro_verify'))
-            ->action(
-                __('notification.registration.action_verify'),
-                url(route('register.activate', $user->activation_code))
-            )
-            ->line(__('notification.registration.outro_verify'));
+            ->subject(__('notification.2fa_email.subject'))
+            ->line(__('notification.2fa_email.intro') . $notifiable->two_factor_code)
+            ->line(__('notification.2fa_email.outro1'))
+            ->line(__('notification.2fa_email.outro2'));
     }
 
     /**

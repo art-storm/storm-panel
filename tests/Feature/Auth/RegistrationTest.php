@@ -87,7 +87,7 @@ class RegistrationTest extends TestCase
         ];
 
         $response = $this->from('/register')->post('/register', $post);
-        $response->assertRedirect(route('register_verify'));
+        $response->assertRedirect(route('register.verify'));
 
         $dbUser = User::where('email', '=', $user->email)
             ->where('is_activate', '=', 0)
@@ -104,8 +104,8 @@ class RegistrationTest extends TestCase
 
         $user->id = $dbUser->id;
 
-        $response = $this->get(route('activate_user', ['code' => $dbUser->activation_code ]));
-        $response->assertRedirect(route('users_welcome'));
+        $response = $this->get(route('register.activate', ['code' => $dbUser->activation_code ]));
+        $response->assertRedirect(route('users.welcome'));
         $this->assertAuthenticatedAs($user);
 
         $dbUser = User::where('email', '=', $user->email)

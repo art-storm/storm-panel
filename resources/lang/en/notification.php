@@ -31,5 +31,11 @@ return [
         'action_verify' => 'Verify Email Address',
         'outro_verify' => 'If you did not create an account, no further action is required.',
     ],
+    '2fa_email' => [
+        'subject' => 'Two factor verification code',
+        'intro' => 'Your two factor code is ',
+        'outro1' => 'The code will expire in 10 minutes',
+        'outro2' => 'If you have not tried to login, ignore this message.',
+    ],
 
 ];

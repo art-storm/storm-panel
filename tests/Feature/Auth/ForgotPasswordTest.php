@@ -73,7 +73,7 @@ class ForgotPasswordTest extends TestCase
             '_token' => 'test',
         ]);
 
-        $response->assertRedirect(route('register_verify'));
+        $response->assertRedirect(route('register.verify'));
 
         $dbUser = User::where('email', '=', $user->email)
             ->where('is_activate', '=', 0)

@@ -18,18 +18,23 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-Route::get('/register_verify', 'Auth\RegisterController@registerVerify')->name('register_verify');
-Route::get('/user_activate/{code}', 'Auth\RegisterController@activateUser')->name('activate_user');
+Route::get('/register_verify', 'Auth\RegisterController@registerVerify')->name('register.verify');
+Route::get('/register_activate/{code}', 'Auth\RegisterController@activateUser')->name('register.activate');
+
+Route::get('2fa/form', 'Auth\TwoFactorController@form')->name('2fa.form');
+Route::post('2fa/check', 'Auth\TwoFactorController@check')->name('2fa.check');
+Route::get('2fa/resend', 'Auth\TwoFactorController@resend')->name('2fa.resend');
 
 // Users routes
-Route::group(['prefix' => 'users'], function () {
-    Route::get('/welcome', 'UserController@welcomePage')->name('users_welcome');
-    Route::get('/profile', 'UserController@profile')->name('users_profile');
-    Route::post('/profile', 'UserController@profileUpdate')->name('users_profile_update');
-    Route::get('/password/change', 'Auth\ChangePasswordController@passwordChangeForm')->name('password_changeForm');
-    Route::post('/password/change', 'Auth\ChangePasswordController@passwordChange')->name('password_change');
-    Route::get('/email/change', 'Auth\ChangeEmailController@emailChangeForm')->name('email_changeForm');
-    Route::post('/email/change', 'Auth\ChangeEmailController@sendEmailChangeLink')->name('email_change');
-    Route::get('/email/change/notify', 'Auth\ChangeEmailController@notifyEmailChangeLink')->name('email_change_notify');
-    Route::get('/email/change/confirm/{token}', 'Auth\ChangeEmailController@confirmEmailChange')->name('email_change_confirm');
+Route::prefix('users')->group(function () {
+    Route::get('/welcome', 'UserController@welcomePage')->name('users.welcome');
+    Route::get('/profile', 'UserController@profile')->name('users.profile');
+    Route::post('/profile', 'UserController@profileUpdate')->name('users.profile_update');
+    Route::get('/password/change', 'Auth\ChangePasswordController@passwordChangeForm')->name('password.change.form');
+    Route::post('/password/change', 'Auth\ChangePasswordController@passwordChange')->name('password.change');
+    Route::get('/email/change', 'Auth\ChangeEmailController@emailChangeForm')->name('email.change.form');
+    Route::post('/email/change', 'Auth\ChangeEmailController@sendEmailChangeLink')->name('email.change');
+    Route::get('/email/change/notify', 'Auth\ChangeEmailController@notifyEmailChangeLink')->name('email.change.notify');
+    Route::get('/email/change/confirm/{token}', 'Auth\ChangeEmailController@confirmEmailChange')
+        ->name('email.change.confirm');
 });

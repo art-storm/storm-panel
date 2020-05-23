@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Notifications\Auth\TwoFactorCodeEmail;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -54,5 +55,17 @@ class LoginController extends Controller
         );
 
         return $credentialsFields;
+    }
+
+    /**
+     * @param Request $request
+     * @param $user
+     */
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->two_factor_state) {
+            $user->generateTwoFactorCode();
+            $user->notify(new TwoFactorCodeEmail());
+        }
     }
 }

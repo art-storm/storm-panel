@@ -15,7 +15,7 @@
         <div class="col-12">
 
             <h4>@lang('registration.text_welcome')<br><br>
-                <a href="{{ route('users_profile') }}">@lang('registration.link_profile') →</a>
+                <a href="{{ route('users.profile') }}">@lang('registration.link_profile') →</a>
             </h4>
             <br><br>
 

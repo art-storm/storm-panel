@@ -37,7 +37,7 @@ class ChangeEmailController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('confirmEmailChange');
+        $this->middleware(['auth', 'twofactor'])->except('confirmEmailChange');
     }
 
     /**
@@ -73,7 +73,7 @@ class ChangeEmailController extends Controller
         $user->email = $request->email;
         $user->notify(new EmailChange($token));
 
-        return redirect(route('email_change_notify'))->with('success', $request->email);
+        return redirect(route('email.change.notify'))->with('success', $request->email);
     }
 
     /**
@@ -131,7 +131,7 @@ class ChangeEmailController extends Controller
             return redirect(route('login'))->with('success', $flash_success);
         }
 
-        return redirect(route('users_profile'))->with('success', $flash_success);
+        return redirect(route('users.profile'))->with('success', $flash_success);
     }
 
     /**

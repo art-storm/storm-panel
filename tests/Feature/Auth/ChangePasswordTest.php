@@ -16,7 +16,7 @@ class ChangePasswordTest extends TestCase
     public function testAuthUserCanViewChangePasswordForm()
     {
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->get(route('password_changeForm'));
+        $response = $this->actingAs($user)->get(route('password.change.form'));
         $response->assertSuccessful();
         $response->assertViewIs('auth.passwords.change');
     }
@@ -28,7 +28,7 @@ class ChangePasswordTest extends TestCase
      */
     public function testNonAuthUserCannotViewChangePasswordForm()
     {
-        $response = $this->get(route('password_changeForm'));
+        $response = $this->get(route('password.change.form'));
         $response->assertRedirect('/login');
     }
 
@@ -41,13 +41,13 @@ class ChangePasswordTest extends TestCase
     {
         $passwordNew = 'password_new';
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->from(route('password_changeForm'))
-            ->post(route('password_change'), [
+        $response = $this->actingAs($user)->from(route('password.change.form'))
+            ->post(route('password.change'), [
                 'password_current' => 'password-wrong',
                 'password' => $passwordNew,
                 'password_confirmation' => $passwordNew,
             ]);
-        $response->assertRedirect(route('password_changeForm'));
+        $response->assertRedirect(route('password.change.form'));
         $response->assertSessionHasErrors('password_current');
     }
 
@@ -60,13 +60,13 @@ class ChangePasswordTest extends TestCase
     {
         $passwordNew = 'pwd';
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->from(route('password_changeForm'))
-            ->post(route('password_change'), [
+        $response = $this->actingAs($user)->from(route('password.change.form'))
+            ->post(route('password.change'), [
                 'password_current' => 'password',
                 'password' => $passwordNew,
                 'password_confirmation' => $passwordNew,
             ]);
-        $response->assertRedirect(route('password_changeForm'));
+        $response->assertRedirect(route('password.change.form'));
         $response->assertSessionHasErrors('password');
     }
 
@@ -80,13 +80,13 @@ class ChangePasswordTest extends TestCase
         $passwordNew = 'password_new';
         $passwordConfirmation = 'password_confirmation';
         $user = factory(User::class)->make();
-        $response = $this->actingAs($user)->from(route('password_changeForm'))
-            ->post(route('password_change'), [
+        $response = $this->actingAs($user)->from(route('password.change.form'))
+            ->post(route('password.change'), [
                 'password_current' => 'password',
                 'password' => $passwordNew,
                 'password_confirmation' => $passwordConfirmation,
             ]);
-        $response->assertRedirect(route('password_changeForm'));
+        $response->assertRedirect(route('password.change.form'));
         $response->assertSessionHasErrors('password');
     }
 
@@ -100,13 +100,13 @@ class ChangePasswordTest extends TestCase
     {
         $passwordNew = 'password_new';
         $user = factory(User::class)->create();
-        $response = $this->actingAs($user)->from(route('password_changeForm'))
-            ->post(route('password_change'), [
+        $response = $this->actingAs($user)->from(route('password.change.form'))
+            ->post(route('password.change'), [
                 'password_current' => 'password',
                 'password' => $passwordNew,
                 'password_confirmation' => $passwordNew,
             ]);
-        $response->assertRedirect(route('users_profile'));
+        $response->assertRedirect(route('users.profile'));
         $response->assertSessionHas('success');
 
         $user->refresh();
