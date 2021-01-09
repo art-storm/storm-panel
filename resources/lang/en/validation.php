@@ -130,8 +130,11 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'role_name' => [
+            'regex' => 'The field must contain only letters, numbers, spaces, dash or the underscore characters.'
+        ],
+        'role_display' => [
+            'regex' => 'The field must contain only letters, numbers, spaces, dash or the underscore characters.'
         ],
     ],
 

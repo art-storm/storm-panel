@@ -24,7 +24,6 @@ class RegisterController extends Controller
     | provide this functionality without requiring any additional code.
     |
     */
-
     use RegistersUsers;
 
     /**
@@ -79,6 +78,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'activation_code' => Str::random(30) . time(),
+            'role_id' => 2, // default role 'user_registered'
         ]);
     }
 
@@ -87,6 +87,7 @@ class RegisterController extends Controller
      *
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @throws \Illuminate\Validation\ValidationException
      */
     protected function register(Request $request)
     {

@@ -73,7 +73,7 @@ class UserProfileTest extends TestCase
             ]);
 
         $response->assertRedirect(route('users.profile'));
-        $response->assertSessionHas('success');
+        $response->assertSessionHas('status');
 
         $user->refresh();
         $this->assertTrue($user->name === $nameNew);

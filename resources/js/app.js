@@ -5,13 +5,14 @@
  */
 
 require('./bootstrap');
+// Bootbox - plugin jQuery/bootstrap for modals
+global.bootbox = require('bootbox');
+// Toastr - plugin jQuery/bootstrap for notifications
+window.toastr = require('toastr');
+// Nestable2 - plugin for menu edit
+window.nestable2 = require('nestable2');
 
 window.Vue = require('vue');
-
-// import VueRouter from 'vue-router';
-// window.Vue.use(VueRouter);
-
-// import UserProfile from './components/UserProfile';
 
 /**
  * The following block of code may be used to automatically register your
@@ -24,14 +25,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('user-profile-2fa', require('./components/UserProfile2FA.vue').default);
-
-// const routes = [
-//     { path: '/users/profile', component: UserProfile, name: 'userProfile' },
-// ];
-//
-// const router = new VueRouter({ routes });
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

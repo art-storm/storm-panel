@@ -1,0 +1,1 @@
+function confirmDelete(e,t,n){return bootbox.confirm({title:n,message:t,buttons:{confirm:{label:"Delete",className:"btn-danger"}},callback:function(t){t&&("string"==typeof e?window.location.href=e:e.submit())}}),!1}

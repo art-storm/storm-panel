@@ -187,7 +187,10 @@ class ForgotPasswordTest extends TestCase
                 'password' => $password,
                 'password_confirmation' => $password,
             ])
-            ->assertSuccessful();
+            ->assertSuccessful()
+            ->assertViewIs('auth.login');
+
+        $this->assertGuest();
 
         $user->refresh();
         $this->assertTrue(Hash::check($password, $user->password));

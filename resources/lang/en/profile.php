@@ -25,6 +25,8 @@ return [
         'change' => 'User profile changed successfully !',
         'change_password' => 'Password changed successfully !',
         'change_email' => 'Email changed successfully !',
+        'updated' => 'User :name updated successfully',
+        'deleted' => 'User :name deleted successfully',
     ],
     'error' => [
         //

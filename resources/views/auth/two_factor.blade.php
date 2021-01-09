@@ -23,7 +23,7 @@
                         </p>
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
                             </div>
                             <input name="two_factor_code" type="text"
                                    class="form-control{{ $errors->has('two_factor_code') ? ' is-invalid' : '' }}"
@@ -42,6 +42,7 @@
                     </form>
                 </div>
             </div>
+        </div>
     </div>
 </div>
 @endsection

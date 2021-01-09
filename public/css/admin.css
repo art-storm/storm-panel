@@ -1,0 +1,44 @@
+.breadcrumb {
+    margin-bottom: 0;
+    padding: 0 1rem;
+    background-color: white;
+}
+
+/* Nestable2 style update for menu builder */
+.dd {
+    max-width: 900px !important;
+}
+
+.dd .dd-handle {
+    font-size: 15px;
+    height: 48px;
+    padding-top: 12px;
+}
+
+.dd .dd-handle small {
+    font-size: 95%;
+}
+
+.dd-item .dd-collapse, .dd-item .dd-expand {
+    height: 35px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.dd-edit, .dd-delete {
+    position: absolute;
+    top: 0px;
+}
+a.dd-edit{right: 75px;}
+a.dd-delete{right: 10px;}
+
+.dd-dragel .dd-handle {
+    font-size: 15px;
+    height: 48px;
+    padding-top: 12px;
+}
+
+.dd-dragel .dd-handle small {
+    font-size: 95%;
+}
+/* Nestable2 style end */

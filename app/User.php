@@ -2,13 +2,18 @@
 
 namespace App;
 
+use App\Traits\UserAuthorize;
+use App\Traits\UserTwoFactor;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Pagination\Paginator;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use UserAuthorize;
+    use UserTwoFactor;
 
     // Table name
     protected $table = 'users';
@@ -23,6 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'is_activate',
+        'role_id',
         'activation_code',
         'two_factor_state',
         'two_factor_method',
@@ -49,44 +55,52 @@ class User extends Authenticatable
         'two_factor_expires_at' => 'datetime',
     ];
 
-    public static function boot()
+    /**
+     * Default items per page
+     * @var int
+     */
+    protected $perPage = 50;
+
+    /**
+     * Get the role record associated with the user.
+     */
+    public function role()
     {
-        parent::boot();
-
-        User::creating(function ($user) {
-            $user->created_ip = ip2long(\Request::ip());
-            $user->updated_ip = ip2long(\Request::ip());
-            $user->created_by = (\Auth::check()) ? \Auth::user()->id : null;
-            $user->updated_by = (\Auth::check()) ? \Auth::user()->id : null;
-        });
-
-        User::updating(function ($user) {
-            $user->updated_ip = ip2long(\Request::ip());
-            $user->updated_by = (\Auth::check()) ? \Auth::user()->id : null;
-        });
+        return $this->hasOne('App\Models\Role', 'id', 'role_id');
     }
 
     /**
-     * Generete 2FA code
+     * Get additional roles record associated with the user.
      */
-    public function generateTwoFactorCode()
+    public function additionalRoles()
     {
-        $this->timestamps = false;
-        $this->two_factor_code = rand(100000, 999999);
-        $this->two_factor_expires_at = now()->addMinutes(10);
-        $this->unsetEventDispatcher();
-        $this->save();
+        return $this->belongsToMany('App\Models\Role', 'user_role');
     }
 
     /**
-     * Reset 2FA code
+     * Scope a query filtering users by email.
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param string $emailSearch
+     * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function resetTwoFactorCode()
+    public function scopeEmailFilter($query, $emailSearch)
     {
-        $this->timestamps = false;
-        $this->two_factor_code = null;
-        $this->two_factor_expires_at = null;
-        $this->unsetEventDispatcher();
-        $this->save();
+        return $query->where('email', 'like', $emailSearch);
+    }
+
+    /**
+     * Scope a query filtering users by role.
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param int $role_id
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeRoleFilter($query, $role_id)
+    {
+        $query = $query->where('role_id', $role_id);
+        $query = $query->orWhereHas('additionalRoles', function ($q) use ($role_id) {
+            $q->where('role_id', $role_id);
+        });
+
+        return $query;
     }
 }

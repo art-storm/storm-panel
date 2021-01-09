@@ -8,6 +8,7 @@ use App\User;
 use Faker;
 use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
+use App\Http\Controllers\Auth\ChangeEmailController as ChangeEmailController;
 
 class ChangeEmailTest extends TestCase
 {

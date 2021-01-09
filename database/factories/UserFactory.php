@@ -22,8 +22,11 @@ $factory->define(User::class, function (Faker $faker) {
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'is_activate' => 1,
+        'role_id' => 2,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
+        'created_ip' => 2130706433,
+        'updated_ip' => 2130706433,
     ];
 });

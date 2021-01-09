@@ -7,8 +7,9 @@ use Tests\TestCase;
 class MainPageTest extends TestCase
 {
     /**
-     * Test open maim page.
+     * Test open main page.
      *
+     * @coversNothing
      * @return void
      */
     public function testMainPage()

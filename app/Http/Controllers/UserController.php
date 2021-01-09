@@ -36,7 +36,6 @@ class UserController extends Controller
     public function profile()
     {
         $user = Auth::user();
-//        var_dump($user);
         return view('users.profile', ['user' => $user]);
     }
 
@@ -67,9 +66,11 @@ class UserController extends Controller
             $user->two_factor_method = null;
             $user->two_factor_code = null;
         }
+
+        // See UserObserver updating event for details
         $user->save();
 
-        $flash_success = __('profile.success.change');
-        return redirect()->route('users.profile')->with('success', $flash_success);
+        $flash_status = __('profile.success.change');
+        return redirect()->route('users.profile')->with('status', $flash_status);
     }
 }

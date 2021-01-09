@@ -7,5 +7,18 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-// Font Awesome
-@import "node_modules/font-awesome/scss/font-awesome.scss";
+// Datatables
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.css';
+@import '~datatables.net-responsive-bs4/css/responsive.bootstrap4.css';
+
+// Font Awesome Free
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+// Toastr for notifications
+@import '~toastr/toastr';
+
+// Nestable2 for menu edit
+@import '~nestable2/dist/jquery.nestable.min.css';

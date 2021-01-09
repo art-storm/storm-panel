@@ -14,10 +14,10 @@
     <div class="row" id="app-profile">
         <div class="col-12">
 
-            @if (session('success'))
+            @if (session('status'))
                 <div class="alert alert-success alert-dismissable">
                     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <strong>{{ session('success') }}</strong>
+                    <strong>{{ session('status') }}</strong>
                 </div>
             @endif
 
@@ -25,12 +25,16 @@
             {{ csrf_field() }}
 
             <div class="form-group row">
-                <label for="role" class="col-lg-3 control-label form-item-label text-lg-right">User roles</label>
+                <label for="name" class="col-lg-3 control-label form-item-label text-lg-right">Name</label>
 
                 <div class="col-lg-4">
-                    <div class="form-item-textnode">
-                        <span>$user->role->display_name</span>
-                    </div>
+                    <input id="name" type="name" class="form-control @error('name') is-invalid @enderror"
+                           name="name" value="{{ $user->name }}" required>
+                    @if ($errors->has('name'))
+                        <div class="invalid-feedback">
+                            <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('name') }}
+                        </div>
+                    @endif
                 </div>
             </div>
 
@@ -55,17 +59,24 @@
             </div>
 
             <div class="form-group row">
-                <label for="name" class="col-lg-3 control-label form-item-label text-lg-right">Name</label>
+                <label for="role" class="col-lg-3 control-label form-item-label text-lg-right">User role</label>
 
                 <div class="col-lg-4">
-                    <input id="name" type="name" class="form-control @error('name') is-invalid @enderror"
-                           name="name" value="{{ $user->name }}" required>
+                    <div class="form-item-textnode">
+                        <span>{{ $user->role->role_display }}</span>
+                    </div>
+                </div>
+            </div>
 
-                    @if ($errors->has('name'))
-                        <div class="invalid-feedback">
-                            <i class="fa fa-exclamation-triangle"></i> {{ $errors->first('name') }}
-                        </div>
-                    @endif
+            <div class="form-group row">
+                <label for="role" class="col-lg-3 control-label form-item-label text-lg-right">Additional roles</label>
+
+                <div class="col-lg-4">
+                    <div class="form-item-textnode">
+                        @foreach($user->additionalRoles as $role)
+                            <span>{{ $role->role_display }}</span><br>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 
