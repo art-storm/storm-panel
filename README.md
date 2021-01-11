@@ -10,7 +10,8 @@ Laravel Admin Panel
 This admin panel realised on Laravel 7.
 
 This admin panel will be useful for those who are starting to develop a new project and who need functions that have already been implemented in this admin panel.
-<h5>Realised features</h5>
+<h3>Realised features</h3>
+
 - User registration
 - User authenticate
 - Two factor auth
