@@ -32,7 +32,7 @@
         "datatables.net-bs4": "^1.10.23",
         "datatables.net-responsive": "^2.2.7",
         "datatables.net-responsive-bs4": "^2.2.7",
-        "elliptic": "^6.5.3",
+        "elliptic": "^6.5.4",
         "nestable2": "^1.6.0",
         "toastr": "^2.1.4",
         "vue-router": "^3.4.9",
