@@ -26,6 +26,9 @@
         "phpunit/phpunit": "^8.5"
     },
     "config": {
+        "platform": {
+            "php": "7.4.19"
+        },
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true
